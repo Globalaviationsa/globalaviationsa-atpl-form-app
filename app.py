@@ -171,9 +171,6 @@ def fill_pdf(student_data, output_filename):
     with open(os.path.join(OUTPUT_DIR, output_filename), "wb") as f:
         writer.write(f)
 
-    with open(os.path.join(OUTPUT_DIR, output_filename), "wb") as f:
-        writer.write(f)
-
 # --- HELPER FUNCTION TO EMAIL PDFs ---
 def send_pdf_via_email(pdf_path):
     try:
@@ -198,17 +195,6 @@ def send_pdf_via_email(pdf_path):
         print("✅ Email sent successfully!")
     except Exception as e:
         print("❌ Error sending email:", e)
-
-    # Attach PDF file
-    with open(pdf_path, "rb") as f:
-        file_data = f.read()
-        msg.add_attachment(file_data, maintype="application", subtype="pdf", filename=os.path.basename(pdf_path))
-
-    # Send via SMTP with TLS on port 587
-    with smtplib.SMTP("mail.globalaviationsa.com", 587) as smtp:
-        smtp.starttls()  # upgrade connection to TLS
-        smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
-        smtp.send_message(msg)
 
 # --- WEB ROUTE ---
 @app.route("/", methods=["GET", "POST"])
