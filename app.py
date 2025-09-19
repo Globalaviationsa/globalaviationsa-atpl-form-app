@@ -308,12 +308,24 @@ def index():
 	    "comm_attempt4": "✓" if "comm_attempt4" in request.form else "",
 	    "comm_date": datetime.datetime.strptime(request.form["comm_date"], "%Y-%m-%d").strftime("%d/%m/%Y") if request.form.get("comm_date") else "",
 
-	    "total_exams": request.form["total_exams"],
-
 	    "declaration_signature": request.form["declaration_signature"],
-	    "declaration_date": datetime.datetime.strptime(request.form["declaration_date"], "%Y-%m-%d").strftime("%d/%m/%Y"),
+	    "declaration_date": datetime.datetime.now().strftime("%d/%m/%Y"),
 
 	}
+
+# --- Recalculate Total Exams on the server side ---
+subjects = [
+    "airlaw", "agk_asp", "agk_i", "mb", "perf",
+    "fpm", "hpl", "met", "gnav", "rnav",
+    "ops", "pof", "comm"
+]
+
+total_exams_count = 0
+for subj in subjects:
+    if any(request.form.get(f"{subj}_attempt{i}") for i in range(1, 5)):
+        total_exams_count += 1
+
+data["total_exams"] = str(total_exams_count)
 
          # Save with unique filename (Surname + timestamp)
         filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
@@ -324,7 +336,8 @@ def index():
         # ✅ Only ONE call here
         send_pdf_via_email(filepath)
 
-        return "✅ Form submitted successfully. The PDF has been sent to the administrator."
+        today_str = datetime.datetime.now().strftime("%d/%m/%Y")
+	return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
 
     return render_template("form.html")
 

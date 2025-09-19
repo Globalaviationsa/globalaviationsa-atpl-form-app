@@ -181,16 +181,13 @@
 	<input type="date" name="comm_date">
 
     <h3>Total Number of Examinations Applied For</h3>
-        <input type="number" name="total_exams" min="0" max="13">
+	<input type="number" name="total_exams" id="total_exams" min="0" max="13" readonly>
 
     <h3 style="margin-top: 40px; color: darkblue;">7. Declaration</h3>
         <p class="instructions" style="margin-top: 0;">Please sign by entering your full name and today's date.</p>
 
        <label>Signature (Type your full name)</label>
        <input type="text" name="declaration_signature" required>
-
-       <label>Date</label>
-       <input type="hidden" name="declaration_date" id="declaration_date">
 
         <button type="submit">Submit</button>
     </form>
@@ -277,6 +274,30 @@ document.addEventListener("DOMContentLoaded", function() {
     dateField.value = `${yyyy}-${mm}-${dd}`;
   }
 });
+
+// --- Auto-count total number of exams ---
+function updateTotalExams() {
+  let total = 0;
+  for (const [key, label] of subjects) {
+    const attempts = Array.from(document.querySelectorAll(
+      `input[name='${key}_attempt1'], input[name='${key}_attempt2'], input[name='${key}_attempt3'], input[name='${key}_attempt4']`
+    ));
+    // Count 1 subject if at least one Attempt is ticked
+    if (attempts.some(cb => cb.checked)) {
+      total++;
+    }
+  }
+  const totalField = document.getElementById("total_exams");
+  if (totalField) totalField.value = total;
+}
+
+// Attach update listener to all attempt checkboxes
+document.querySelectorAll("input[type='checkbox']").forEach(cb => {
+  cb.addEventListener("change", updateTotalExams);
+});
+
+// Run once on page load
+updateTotalExams();
 
 </script>
 
