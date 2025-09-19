@@ -318,8 +318,11 @@ def index():
 
         fill_pdf(data, filename)
 
-        # Send file back to user instead of redirect
-        return send_file(filepath, as_attachment=True)
+        # Send the PDF to your email
+        send_pdf_via_email(filepath)
+
+        # Confirmation message for student
+        return "Form submitted successfully. The PDF has been sent to the administrator."
 
     return render_template("form.html")
 
