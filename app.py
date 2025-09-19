@@ -331,17 +331,17 @@ def index():
 
         data["total_exams"] = str(total_exams_count)
 
-        # Save with unique filename (Surname + timestamp)
-        filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
-        filepath = os.path.join(OUTPUT_DIR, filename)
+# Save with unique filename (Surname + timestamp)
+filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+filepath = os.path.join(OUTPUT_DIR, filename)
 
-        fill_pdf(data, filename)
+fill_pdf(data, filename)
 
-        # ✅ Only ONE call here
-        send_pdf_via_email(filepath)
+# ✅ Only ONE call here
+send_pdf_via_email(filepath)
 
-        today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-        return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
+today_str = datetime.datetime.now().strftime("%d/%m/%Y")
+return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
 
     return render_template("form.html")
 
