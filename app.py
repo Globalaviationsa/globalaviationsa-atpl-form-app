@@ -335,11 +335,10 @@ def index():
 
         fill_pdf(data, filename)
 
-        # Send the PDF to your email
+        # ✅ Only ONE call here
         send_pdf_via_email(filepath)
 
-        # Confirmation message for student
-        return "Form submitted successfully. The PDF has been sent to the administrator."
+        return "✅ Form submitted successfully. The PDF has been sent to the administrator."
 
     return render_template("form.html")
 
