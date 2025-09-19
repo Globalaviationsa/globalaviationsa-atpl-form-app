@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, send_file
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from PyPDF2 import PdfReader, PdfWriter
-import os, datetime
+import os, datetime, smtplib
+from email.message import EmailMessage
 
 app = Flask(__name__)
 
@@ -170,6 +171,28 @@ def fill_pdf(student_data, output_filename):
     with open(os.path.join(OUTPUT_DIR, output_filename), "wb") as f:
         writer.write(f)
 
+    with open(os.path.join(OUTPUT_DIR, output_filename), "wb") as f:
+        writer.write(f)
+
+# --- HELPER FUNCTION TO EMAIL PDFs ---
+def send_pdf_via_email(pdf_path):
+    msg = EmailMessage()
+    msg["Subject"] = "New ATPL Application Form Submission"
+    msg["From"] = os.environ["EMAIL_USER"]
+    msg["To"] = os.environ["EMAIL_USER"]
+    msg.set_content("Attached is a completed ATPL application form.")
+
+    # Attach PDF file
+    with open(pdf_path, "rb") as f:
+        file_data = f.read()
+        msg.add_attachment(file_data, maintype="application", subtype="pdf", filename=os.path.basename(pdf_path))
+
+    # Send via SMTP with TLS on port 587
+    with smtplib.SMTP("mail.globalaviationsa.com", 587) as smtp:
+        smtp.starttls()  # upgrade connection to TLS
+        smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
+        smtp.send_message(msg)
+
 # --- WEB ROUTE ---
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -289,11 +312,14 @@ def index():
 
 	}
 
-        # Save with unique filename (Surname + timestamp)
+         # Save with unique filename (Surname + timestamp)
         filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+        filepath = os.path.join(OUTPUT_DIR, filename)
+
         fill_pdf(data, filename)
 
-        return redirect("/")  # refresh page after submit
+        # Send file back to user instead of redirect
+        return send_file(filepath, as_attachment=True)
 
     return render_template("form.html")
 
