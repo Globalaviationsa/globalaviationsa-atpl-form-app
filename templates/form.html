@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATPL Application Form September 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; }
+        input { padding: 8px; font-size: 14px; }
+        button { margin-top: 20px; padding: 10px; font-size: 16px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: darkred; margin-bottom: 5px;">
+    ATPL Application Form
+</h1>
+<p style="text-align: center; font-style: italic; font-weight: bold; color: gray; margin-bottom: 20px;">
+    Global Aviation SA Class of September 2025
+</p>
+    <form method="post">
+
+        <h3 style="margin-top: 40px; color: darkblue;">1. Personal Details</h3>
+        <p class="instructions" style="margin-top: 0;">Please complete all fields in BLOCK CAPITALS.</p>
+
+        <label>Surname</label>
+        <input type="text" name="surname" required>
+
+        <label>First Name</label>
+        <input type="text" name="firstname" required>
+
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob" required>
+
+        <label>Nationality</label>
+        <input type="text" name="nationality" required>
+
+	<label>Place of Birth (Town)</label>
+	<input type="text" name="birthplace_town" required>
+
+	<label>Place of Birth (Country)</label>
+	<input type="text" name="birthplace_country" required>
+
+        <label>Address</label>
+        <input type="text" name="address" required>
+
+        <label>Postcode</label>
+        <input type="text" name="postcode" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" required>
+
+        <label>Mobile</label>
+        <input type="text" name="mobile" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+	
+        <h3 style="margin-top: 40px; color: darkblue;">4. PART-FCL ATPL Examinations</h3>
+        <p class="instructions" style="margin-top: 0;">Please select the subjects you wish to be examined at (select Attempt 1 if this is your 1st Attempt, Attempt 2 if this is your 2nd Attempt etc) and the date you have passed each subject if applicable.</p>
+
+    <h3>Air Law</h3>
+	<label><input type="checkbox" name="airlaw_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="airlaw_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="airlaw_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="airlaw_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="airlaw_date">
+
+    <h3>Aircraft General Knowledge_Airframe/Systems/Powerplant</h3>
+	<label><input type="checkbox" name="agk_asp_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="agk_asp_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="agk_asp_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="agk_asp_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="agk_asp_date">
+
+    <h3>Aircraft General Knowledge_Instrumentation</h3>
+	<label><input type="checkbox" name="agk_i_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="agk_i_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="agk_i_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="agk_i_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="agk_i_date">
+
+    <h3>Mass and Balance</h3>
+	<label><input type="checkbox" name="mb_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="mb_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="mb_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="mb_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="mb_date">
+
+    <h3>Performance</h3>
+	<label><input type="checkbox" name="perf_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="perf_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="perf_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="perf_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="perf_date">
+
+    <h3>Flight Planning and Monitoring</h3>
+	<label><input type="checkbox" name="fpm_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="fpm_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="fpm_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="fpm_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="fpm_date">
+
+    <h3>Human Performance and Limitations</h3>
+	<label><input type="checkbox" name="hpl_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="hpl_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="hpl_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="hpl_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="hpl_date">
+
+    <h3>Meteorology</h3>
+	<label><input type="checkbox" name="met_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="met_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="met_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="met_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="met_date">
+
+    <h3>General Navigation</h3>
+	<label><input type="checkbox" name="gnav_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="gnav_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="gnav_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="gnav_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="gnav_date">
+
+    <h3>Radio Navigation</h3>
+	<label><input type="checkbox" name="rnav_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="rnav_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="rnav_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="rnav_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="rnav_date">
+
+    <h3>Operational Procedures</h3>
+	<label><input type="checkbox" name="ops_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="ops_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="ops_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="ops_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="ops_date">
+
+    <h3>Principles of Flight</h3>
+	<label><input type="checkbox" name="pof_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="pof_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="pof_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="pof_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="pof_date">
+
+    <h3>Communications</h3>
+	<label><input type="checkbox" name="comm_attempt1"> Attempt 1</label>
+	<label><input type="checkbox" name="comm_attempt2"> Attempt 2</label>
+	<label><input type="checkbox" name="comm_attempt3"> Attempt 3</label>
+	<label><input type="checkbox" name="comm_attempt4"> Attempt 4</label>
+	<br>
+	<label>Date Passed</label>
+	<input type="date" name="comm_date">
+
+    <h3>Total Number of Examinations Applied For</h3>
+        <input type="number" name="total_exams" min="0" max="13">
+
+    <h3 style="margin-top: 40px; color: darkblue;">7. Declaration</h3>
+        <p class="instructions" style="margin-top: 0;">Please sign by entering your full name and today's date.</p>
+
+       <label>Signature (Type your full name)</label>
+       <input type="text" name="declaration_signature" required>
+
+       <label>Date</label>
+       <input type="date" name="declaration_date" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
