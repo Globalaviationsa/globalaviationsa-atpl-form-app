@@ -176,11 +176,28 @@ def fill_pdf(student_data, output_filename):
 
 # --- HELPER FUNCTION TO EMAIL PDFs ---
 def send_pdf_via_email(pdf_path):
-    msg = EmailMessage()
-    msg["Subject"] = "New ATPL Application Form Submission"
-    msg["From"] = os.environ["EMAIL_USER"]
-    msg["To"] = os.environ["EMAIL_USER"]
-    msg.set_content("Attached is a completed ATPL application form.")
+    try:
+        print("📧 Preparing email...")
+
+        msg = EmailMessage()
+        msg["Subject"] = "New ATPL Application Form Submission"
+        msg["From"] = os.environ["EMAIL_USER"]
+        msg["To"] = os.environ["EMAIL_USER"]
+        msg.set_content("Attached is a completed ATPL application form.")
+
+        with open(pdf_path, "rb") as f:
+            file_data = f.read()
+            msg.add_attachment(file_data, maintype="application", subtype="pdf", filename=os.path.basename(pdf_path))
+
+        print("📡 Connecting to SMTP...")
+        with smtplib.SMTP("mail.globalaviationsa.com", 587) as smtp:
+            smtp.starttls()
+            smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
+            smtp.send_message(msg)
+
+        print("✅ Email sent successfully!")
+    except Exception as e:
+        print("❌ Error sending email:", e)
 
     # Attach PDF file
     with open(pdf_path, "rb") as f:
