@@ -8,7 +8,17 @@ from email.message import EmailMessage
 app = Flask(__name__)
 
 # Your pre-filled template PDF (must be in the same folder as this app.py)
-TEMPLATE_PDF = "ATPL_Class_Spring2025_Template.pdf"
+TEMPLATE_MAP = {
+    "Feb_2023": "Application_ATPL_Feb_2023_Template.pdf",
+    "Jun_2023": "Application_ATPL_Jun_2023_Template.pdf",
+    "Oct_2023": "Application_ATPL_Oct_2023_Template.pdf",
+    "Feb_2024": "Application_ATPL_Feb_2024_Template.pdf",
+    "Jun_2024": "Application_ATPL_Jun_2024_Template.pdf",
+    "Oct_2024": "Application_ATPL_Oct_2024_Template.pdf",
+    "Feb_2025": "Application_ATPL_Feb_2025_Template.pdf",
+    "Mar_A3_2025": "Application_ATPL_Mar_A3_2025_Template.pdf",
+    "Jun_2025": "Application_ATPL_Jun_2025_Template.pdf"
+}
 OUTPUT_DIR = "filled_pdfs"
 
 if not os.path.exists(OUTPUT_DIR):
@@ -129,7 +139,7 @@ def fill_pdf(student_data, output_filename):
     c.save()
 
     # --- MERGE WITH TEMPLATE ---
-    template = PdfReader(open(TEMPLATE_PDF, "rb"))
+    template = PdfReader(open(student_data["template_pdf"], "rb"))
     overlay = PdfReader(open(overlay_path, "rb"))
     writer = PdfWriter()
 
@@ -180,6 +190,12 @@ def index():
            or not request.form["email"] or not request.form["declaration_signature"]:
             return "Error: You must fill all required fields in Section 1 Personal Details as well as Section 7 Declaration", 400
 
+	# --- Class Selection ---
+        selected_class = request.form["class_selection"]
+        if selected_class not in TEMPLATE_MAP:
+            return "Error: Invalid class selected.", 400
+        template_pdf = TEMPLATE_MAP[selected_class]
+        
         # --- COLLECT DATA ---
         data = {
             "surname": request.form["surname"],
@@ -194,6 +210,7 @@ def index():
             "phone": request.form["phone"],
             "mobile": request.form["mobile"],
             "email": request.form["email"],
+            "template_pdf": template_pdf,
 
             # --- Subjects ---
             "airlaw_attempt1": "✓" if "airlaw_attempt1" in request.form else "",
@@ -302,7 +319,7 @@ def index():
         send_pdf_via_email(filepath)
 
         today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-        return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
+        return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to Global Aviation's team."
 
     return render_template("form.html")
 
