@@ -201,7 +201,7 @@ def send_pdf_via_email(pdf_path):
 def index():
     if request.method == "POST":
 # --- REQUIRED FIELD VALIDATION ---
-        if not request.form["surname"] or not request.form["firstname"] or not request.form["title"] or not request.form["dob"] or not request.form["nationality"] or not request.form["birthplace_town"] or not request.form["birthplace_country"] or not request.form["address"] or not request.form["postcode"] or not request.form["phone"] or not request.form["mobile"] or not request.form["email"] or not request.form["declaration_signature"] or not request.form["declaration_date"]:
+        if not request.form["surname"] or not request.form["firstname"] or not request.form["title"] or not request.form["dob"] or not request.form["nationality"] or not request.form["birthplace_town"] or not request.form["birthplace_country"] or not request.form["address"] or not request.form["postcode"] or not request.form["phone"] or not request.form["mobile"] or not request.form["email"] or not request.form["declaration_signature"]:
             return "Error: You must fill all required fields in Section 1 Personal Details as well as Section 7 Declaration", 400
         data = {
             "surname": request.form["surname"],
