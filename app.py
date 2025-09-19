@@ -313,21 +313,25 @@ def index():
 
 	}
 
-# --- Recalculate Total Exams on the server side ---
-subjects = [
-    "airlaw", "agk_asp", "agk_i", "mb", "perf",
-    "fpm", "hpl", "met", "gnav", "rnav",
-    "ops", "pof", "comm"
-]
+        # --- Recalculate Total Exams on the server side ---
+        subjects = [
+            "airlaw", "agk_asp", "agk_i", "mb", "perf",
+            "fpm", "hpl", "met", "gnav", "rnav",
+            "ops", "pof", "comm"
+        ]
 
-total_exams_count = 0
-for subj in subjects:
-    if any(request.form.get(f"{subj}_attempt{i}") for i in range(1, 5)):
-        total_exams_count += 1
+        total_exams_count = 0
+        for subj in subjects:
+            if any(request.form.get(f"{subj}_attempt{i}") for i in range(1, 5)):
+                total_exams_count += 1
 
-data["total_exams"] = str(total_exams_count)
+        # ✅ Block submission if no subjects selected
+        if total_exams_count == 0:
+            return "Error: You must select at least one subject in Section 4.", 400
 
-         # Save with unique filename (Surname + timestamp)
+        data["total_exams"] = str(total_exams_count)
+
+        # Save with unique filename (Surname + timestamp)
         filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
         filepath = os.path.join(OUTPUT_DIR, filename)
 
@@ -337,7 +341,7 @@ data["total_exams"] = str(total_exams_count)
         send_pdf_via_email(filepath)
 
         today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-	return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
+        return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to the administrator."
 
     return render_template("form.html")
 
