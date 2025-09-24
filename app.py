@@ -322,7 +322,7 @@ def index():
         data["total_exams"] = str(total_exams_count)
 
         # --- Save and Email ---
-        filename = f"{data['surname']}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+        filename = f"{data['firstname']}_{data['surname']}_{request.form['class_selection']}_{datetime.datetime.now().strftime('%Y%m%d')}.pdf"
         filepath = os.path.join(OUTPUT_DIR, filename)
 
         fill_pdf(data, filename)
