@@ -29,8 +29,8 @@ def fill_pdf(student_data, output_filename):
     overlay_path = "overlay.pdf"
     c = canvas.Canvas(overlay_path, pagesize=A4)
 
-    # --- Personal Details (Section 1) ---
-    c.setFont("Helvetica-Bold", 10)
+    # --- Page 1 : Personal Details (Section 1) ---
+    c.setFont("Helvetica", 9)
     c.drawString(75, 608, student_data["surname"].upper())
     c.drawString(350, 608, student_data["firstname"].upper())
     c.drawString(125, 588.5, student_data["title"].upper())
@@ -44,11 +44,15 @@ def fill_pdf(student_data, output_filename):
     c.drawString(358, 511, student_data["mobile"].upper())
     c.drawString(100, 492, student_data["email"])
 
-    # --- Page 2 ---
-    c.showPage()
-    c.setFont("Helvetica-Bold", 10)
+    # --- Page 1 : Section 3 (Date) ---
+    c.setFont("Helvetica", 10)
+    c.drawString(330, 214, student_data["declaration_date"])  # adjust coords
 
-    # Each subject row (Attempts + Date)
+    # --- Move to Page 2 ---
+    c.showPage()
+    c.setFont("Helvetica", 10)
+
+    # --- Page 2 : Section 5 (Subjects + Attempts + Dates) ---
     c.drawString(345, 646, student_data["airlaw_attempt1"])
     c.drawString(382, 646, student_data["airlaw_attempt2"])
     c.drawString(418, 646, student_data["airlaw_attempt3"])
@@ -130,9 +134,15 @@ def fill_pdf(student_data, output_filename):
     # Total Exams
     c.drawString(345, 436, student_data["total_exams"])
 
-    # --- PAGE 3 : Declaration ---
+    # --- Page 2 : Section 5 (Date) ---
+    c.setFont("Helvetica", 10)
+    c.drawString(310, 130, student_data["declaration_date"])  # adjust coords
+
+    # --- Move to Page 3 ---
     c.showPage()
-    c.setFont("Helvetica-Bold", 11)
+    c.setFont("Helvetica", 10)
+
+    # --- Page 3 : Declaration ---
     c.drawString(70, 421, student_data["declaration_signature"].upper())
     c.drawString(315, 421, student_data["declaration_date"])
 
