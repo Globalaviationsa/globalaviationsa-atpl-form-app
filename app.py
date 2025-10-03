@@ -9,15 +9,12 @@ app = Flask(__name__)
 
 # Your pre-filled template PDF (must be in the same folder as this app.py)
 TEMPLATE_MAP = {
-    "Feb_2023": "Application_ATPL_Feb_2023_Template.pdf",
-    "Jun_2023": "Application_ATPL_Jun_2023_Template.pdf",
-    "Oct_2023": "Application_ATPL_Oct_2023_Template.pdf",
-    "Feb_2024": "Application_ATPL_Feb_2024_Template.pdf",
-    "Jun_2024": "Application_ATPL_Jun_2024_Template.pdf",
-    "Oct_2024": "Application_ATPL_Oct_2024_Template.pdf",
-    "Feb_2025": "Application_ATPL_Feb_2025_Template.pdf",
-    "Mar_A3_2025": "Application_ATPL_Mar_A3_2025_Template.pdf",
-    "Jun_2025": "Application_ATPL_Jun_2025_Template.pdf"
+    "Integrated_Old": "Application ATPL Fillable_Generic_ATPL.pdf",
+    "Modular_Old": "Application ATPL Fillable_Generic_Modular.pdf",
+    "Feb_2025": "Application ATPL Fillable_Feb_2025_3rd_Trimester.pdf",
+    "Mar_A3_2025": "Application ATPL Fillable_Aegean_2025_3rd_Trimester.pdf",
+    "Jun_2025": "Application ATPL Fillable_June_2025_2nd_Trimester.pdf",
+    "Sep_2025": "Application ATPL Fillable_Sep_2025_1st_Trimester.pdf"
 }
 OUTPUT_DIR = "filled_pdfs"
 
