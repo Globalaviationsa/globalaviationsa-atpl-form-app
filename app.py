@@ -166,7 +166,7 @@ def send_pdf_via_email(pdf_path):
         msg = EmailMessage()
         msg["Subject"] = os.path.splitext(os.path.basename(pdf_path))[0]
         msg["From"] = os.environ["EMAIL_USER"]
-        msg["To"] = os.environ["EMAIL_USER"]
+        msg["To"] = "exams@globalaviationsa.com"
         msg.set_content("Attached is a completed ATPL application form.")
 
         with open(pdf_path, "rb") as f:
