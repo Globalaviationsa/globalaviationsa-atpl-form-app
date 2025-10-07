@@ -165,8 +165,8 @@ def send_pdf_via_email(pdf_path):
 
         msg = EmailMessage()
         msg["Subject"] = os.path.splitext(os.path.basename(pdf_path))[0]
-        msg["From"] = os.environ["EMAIL_USER"]
-        msg["To"] = "exams@globalaviationsa.com"
+        msg["From"] = sender
+        msg["To"] = recipient
         msg.set_content("Attached is a completed ATPL application form.")
 
         with open(pdf_path, "rb") as f:
@@ -177,7 +177,7 @@ def send_pdf_via_email(pdf_path):
         print("📡 Connecting to SMTP...")
         with smtplib.SMTP("mail.globalaviationsa.com", 587) as smtp:
             smtp.starttls()
-            smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
+            smtp.login(sender, os.environ["EMAIL_PASS"])
             smtp.send_message(msg)
 
         print("✅ Email sent successfully!")
