@@ -164,7 +164,7 @@ def send_pdf_via_email(pdf_path):
         print("📧 Preparing email...")
 
         msg = EmailMessage()
-        msg["Subject"] = "New ATPL Application Form Submission"
+        msg["Subject"] = os.path.splitext(os.path.basename(pdf_path))[0]
         msg["From"] = os.environ["EMAIL_USER"]
         msg["To"] = os.environ["EMAIL_USER"]
         msg.set_content("Attached is a completed ATPL application form.")
