@@ -159,33 +159,51 @@ def fill_pdf(student_data, output_filename):
         writer.write(f)
 
 # --- HELPER FUNCTION TO EMAIL PDFs ---
-def send_pdf_via_email(pdf_path):
+# --- HELPER FUNCTION TO EMAIL PDFs TO ADMIN + STUDENT ---
+def send_emails(pdf_path, student_email):
     try:
-        print("📧 Preparing email...")
+        subject = os.path.splitext(os.path.basename(pdf_path))[0]  # same as PDF name
 
-        sender = os.environ["EMAIL_USER"]
-        recipient = "exams@globalaviationsa.com"
-
-        msg = EmailMessage()
-        msg["Subject"] = os.path.splitext(os.path.basename(pdf_path))[0]
-        msg["From"] = sender
-        msg["To"] = recipient
-        msg.set_content("Attached is a completed ATPL application form.")
-
+        # --- Admin email (with PDF attached) ---
+        admin_msg = EmailMessage()
+        admin_msg["Subject"] = subject
+        admin_msg["From"] = os.environ["EMAIL_USER"]                  # exams@globalaviationsa.com
+        admin_msg["To"] = "exams@globalaviationsa.com"                # receive at exams inbox
+        admin_msg.set_content("Attached is a completed ATPL application form.")
         with open(pdf_path, "rb") as f:
-            file_data = f.read()
-            msg.add_attachment(file_data, maintype="application", subtype="pdf",
-                               filename=os.path.basename(pdf_path))
+            admin_msg.add_attachment(
+                f.read(),
+                maintype="application",
+                subtype="pdf",
+                filename=os.path.basename(pdf_path)
+            )
 
-        print("📡 Connecting to SMTP...")
+        # --- Student email (no attachment) ---
+        student_msg = EmailMessage()
+        student_msg["Subject"] = subject
+        student_msg["From"] = os.environ["EMAIL_USER"]                # send from exams@
+        student_msg["To"] = student_email
+        student_msg.set_content(
+            "Dear Student,\n\n"
+            "Your email has been successfully received.\n\n"
+            "Please make sure to check FlightLogger regularly for important updates and deadlines.\n\n"
+            "Once your application is submitted to the HCAA, you will be able to view it in your profile under:\n\n"
+            "Documents > HCAA Exams\n\n"
+            "If there is any issue with your application, we will contact you directly.\n\n"
+            "After the examination period, please collect your PDF results and send them in a single email to: exams@globalaviationsa.com "\n\n"
+            "We are here to support you throughout the process. Should you have any questions or need assistance, please don't hesitate to reach out."
+        )
+
+        # --- Send both via SMTP (one connection) ---
         with smtplib.SMTP("mail.globalaviationsa.com", 587) as smtp:
             smtp.starttls()
-            smtp.login(sender, os.environ["EMAIL_PASS"])
-            smtp.send_message(msg)
+            smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
+            smtp.send_message(admin_msg)
+            smtp.send_message(student_msg)
 
-        print("✅ Email sent successfully!")
+        print("✅ Admin + Student emails sent.")
     except Exception as e:
-        print("❌ Error sending email:", e)
+        print("❌ Email error:", e)
 
 # --- WEB ROUTE ---
 @app.route("/", methods=["GET", "POST"])
@@ -326,10 +344,10 @@ def index():
         filepath = os.path.join(OUTPUT_DIR, filename)
 
         fill_pdf(data, filename)
-        send_pdf_via_email(filepath)
+        send_emails(filepath, data["email"])
 
         today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-        return f"✅ Form submitted successfully on {today_str}. The PDF has been sent to Global Aviation's team."
+        return f"✅ Form submitted successfully on {today_str}. Your HCAA Application has been sent to Global Aviation's team."
 
     return render_template("form.html")
 
