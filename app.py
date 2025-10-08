@@ -185,7 +185,7 @@ def send_emails(pdf_path, student_email):
         student_msg["To"] = student_email
         student_msg.set_content(
             "Dear Student,\n\n"
-            "Your email has been successfully received.\n\n"
+            "Your HCAA Examinations Application has been successfully received.\n\n"
             "Please make sure to check FlightLogger regularly for important updates and deadlines.\n\n"
             "Once your application is submitted to the HCAA, you will be able to view it in your profile under:\n\n"
             "Documents > HCAA Exams\n\n"
@@ -347,7 +347,7 @@ def index():
         send_emails(filepath, data["email"])
 
         today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-        return f"✅ Form submitted successfully on {today_str}. Your HCAA Application has been sent to Global Aviation's team."
+        return f"✅ Form submitted successfully on {today_str}. Your HCAA Examinations Application has been sent to Global Aviation's team."
 
     return render_template("form.html")
 
