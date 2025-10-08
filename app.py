@@ -190,7 +190,7 @@ def send_emails(pdf_path, student_email):
             "Once your application is submitted to the HCAA, you will be able to view it in your profile under:\n\n"
             "Documents > HCAA Exams\n\n"
             "If there is any issue with your application, we will contact you directly.\n\n"
-            "After the examination period, please collect your PDF results and send them in a single email to: exams@globalaviationsa.com "\n\n"
+            "After the examination period, please collect your PDF results and send them in a single email to: exams@globalaviationsa.com. \n\n"
             "We are here to support you throughout the process. Should you have any questions or need assistance, please don't hesitate to reach out."
         )
 
