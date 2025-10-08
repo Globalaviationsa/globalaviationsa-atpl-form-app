@@ -163,6 +163,9 @@ def send_pdf_via_email(pdf_path):
     try:
         print("📧 Preparing email...")
 
+        sender = os.environ["EMAIL_USER"]
+        recipient = "exams@globalaviationsa.com"
+
         msg = EmailMessage()
         msg["Subject"] = os.path.splitext(os.path.basename(pdf_path))[0]
         msg["From"] = sender
