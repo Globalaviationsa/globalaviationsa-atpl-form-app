@@ -13,7 +13,7 @@ TEMPLATE_MAP = {
     "Modular_Old": "Application ATPL Fillable_Generic_Modular.pdf",
     "Feb_2025": "Application ATPL Fillable_Feb_2025_3rd_Trimester.pdf",
     "Mar_A3_2025": "Application ATPL Fillable_Aegean_2025_3rd_Trimester.pdf",
-    "Jun_2025": "Application ATPL Fillable_June_2025_3rd_Trimester.pdf",
+    "Jun_2025": "Application ATPL Fillable_Jun_2025_3rd_Trimester.pdf",
     "Sep_2025": "Application ATPL Fillable_Sep_2025_3rd_Trimester.pdf",
     "Oct_2025": "Application ATPL Fillable_Oct_2025_2nd_Trimester.pdf",
     "Jan_2026": "Application ATPL Fillable_Jan_2026_1st_Trimester.pdf",
