@@ -15,10 +15,11 @@ TEMPLATE_MAP = {
     "Mar_A3_2025": "Application ATPL Fillable_Aegean_2025_3rd_Trimester.pdf",
     "Jun_2025": "Application ATPL Fillable_Jun_2025_3rd_Trimester.pdf",
     "Sep_2025": "Application ATPL Fillable_Sep_2025_3rd_Trimester.pdf",
-    "Oct_2025": "Application ATPL Fillable_Oct_2025_2nd_Trimester.pdf",
-    "Jan_2026": "Application ATPL Fillable_Jan_2026_1st_Trimester.pdf",
+    "Oct_2025": "Application ATPL Fillable_Oct_2025_3rd_Trimester.pdf",
+    "Jan_2026": "Application ATPL Fillable_Jan_2026_2nd_Trimester.pdf",
     "Mar_2026": "Application ATPL Fillable_Mar_2026_1st_Trimester.pdf",
-    "Mar_A3_2026": "Application ATPL Fillable_Aegean_2026_1st_Trimester.pdf"
+    "Mar_A3_2026": "Application ATPL Fillable_Aegean_2026_1st_Trimester.pdf",
+    "May_2026": "Application ATPL Fillable_May_2026_1st_Trimester.pdf"
 }
 OUTPUT_DIR = "filled_pdfs"
 
