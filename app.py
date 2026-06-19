@@ -200,7 +200,7 @@ def send_emails(pdf_path, student_email):
         )
 
         # --- Send both via SMTP (one connection) ---
-        with smtplib.SMTP("mail.office365.com", 587) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
             smtp.starttls()
             smtp.login(os.environ["EMAIL_USER"], os.environ["EMAIL_PASS"])
             smtp.send_message(admin_msg)
