@@ -352,7 +352,7 @@ def index():
         send_emails(filepath, data["email"])
 
         today_str = datetime.datetime.now().strftime("%d/%m/%Y")
-        return f"✅ Form submitted successfully on {today_str}. Your HCAA Examinations Application has been sent to Global Aviation's team."
+        return f"✅ Form submitted successfully on {today_str}. Your HCAA Examinations Application has been sent to Global Aviation's team. You will receive a confirmation email from globalaviationsaexams2@gmail.com shortly."
 
     return render_template("form.html")
 
